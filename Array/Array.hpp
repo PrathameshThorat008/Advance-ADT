@@ -12,6 +12,11 @@ private:
 public:
     int length;
     Array() : length(0), arr((T *)malloc(sizeof(T) * length)){};
+    Array(Array<T> *arr2)
+        : length(0), arr((T *)malloc(sizeof(T) * length))
+    {
+        this->operator+=(*arr2);
+    };
 
     void add(T el)
     {
@@ -31,6 +36,11 @@ public:
             arr[i] = arr[i - 1];
         }
         arr[index] = el;
+    }
+
+    void operator<<(T el)
+    {
+        add(el);
     }
 
     void remove()
@@ -144,6 +154,16 @@ public:
         }
     }
 
+    T &get(int index)
+    {
+        return arr[index];
+    }
+
+    T &operator[](int index)
+    {
+        return arr[index];
+    }
+
     string join(string connector)
     {
         string str;
@@ -156,6 +176,23 @@ public:
         }
 
         return str;
+    }
+
+    Array<T> operator+(Array<T> arr2)
+    {
+        Array<T> x;
+        for (int i = 0; i < length; i++)
+            x << arr[i];
+        for (int i = 0; i < arr2.length; i++)
+            x << arr2[i];
+
+        return x;
+    }
+
+    void operator+=(Array<T> arr2)
+    {
+        for (int i = 0; i < arr2.length; i++)
+            add(arr2[i]);
     }
 };
 
