@@ -5,6 +5,7 @@ Advance-ADT is Bundle of Abstract Data Structures for C++. These has kept so sim
 # Data Structures
 
 - [Array](https://github.com/PrathameshThorat008/Advance-ADT/tree/main/Array)
+- [Linked List](https://github.com/PrathameshThorat008/Advance-ADT/tree/main/Listed%20List)
 
 # Research
 
