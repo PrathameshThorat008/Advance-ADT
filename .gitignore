@@ -33,3 +33,6 @@
 
 # workspace
 .vscode/
+*.DOC
+*.doc
+tempCodeRunnerFile.cpp
