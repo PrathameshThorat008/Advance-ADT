@@ -194,6 +194,11 @@ public:
         for (int i = 0; i < arr2.length; i++)
             add(arr2[i]);
     }
+
+    ~Array()
+    {
+        free(arr);
+    }
 };
 
 template <>
