@@ -2,6 +2,11 @@
 #include "Array.hpp"
 using namespace std;
 
+int twice(int el)
+{
+     return el * 2;
+}
+
 int main()
 {
      // initilize array
@@ -68,15 +73,18 @@ int main()
      cout << "2nd Array : \n"
           << arr2.join(" ") << endl;
 
-     cout << "Concatinated Array : \n"
-          << (arr + arr2).join(" ") << endl;
+     // New Array with Map Method
+     cout << "Arr * 2 with map method : \n"
+          << arr.map(twice).join(" ") << endl;
 
      // initilize array 3
-     Array<int> arr3 = arr + arr2;
+     Array<int> arr3 = (arr + arr2);
      cout << "3rd Array [new concatinated] : \n"
           << arr3.join(" ") << endl;
+
      arr3 += arr;
      cout << "3rd Array [appended] : \n"
           << arr3.join(" ") << endl;
+
      return 0;
 }

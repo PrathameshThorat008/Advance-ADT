@@ -19,6 +19,12 @@ public:
         head = new Node(data);
     }
 
+    LinkedList(LinkedList<T> *ll2) : length(0)
+    {
+        for (int i = 0; i < ll2->length; i++)
+            this->insert(ll2->operator[](i));
+    }
+
     void insert_head(T data)
     {
         if (length != 0)
@@ -170,15 +176,56 @@ public:
         return str;
     }
 
-    void print()
+    LinkedList<T> operator+(LinkedList<T> ll2)
     {
-        Node *curr = head;
-        while (curr->next != NULL)
+        LinkedList<T> ll(this);
+
+        for (int i = 0; i < ll2.length; i++)
+            ll.insert(ll2[i]);
+
+        return ll;
+    }
+
+    void operator+=(LinkedList<T> ll2)
+    {
+        for (int i = 0; i < ll2.length; i++)
+            this->insert(ll2[i]);
+    }
+
+    LinkedList<T> map(T (*callback)(T))
+    {
+        LinkedList<T> newll;
+        for (int i = 0; i < this->length; i++)
         {
-            cout << curr->data << "->";
-            curr = curr->next;
+            T data = callback(this->operator[](i));
+            newll.insert(data);
         }
-        cout << curr->data << "->";
+
+        return newll;
+    }
+
+    LinkedList<T> map(T (*callback)(T, int))
+    {
+        LinkedList<T> newll;
+        for (int i = 0; i < this->length; i++)
+        {
+            T data = callback(this->operator[](i), i);
+            newll.insert(data);
+        }
+
+        return newll;
+    }
+
+    LinkedList<T> map(T (*callback)(T, int, LinkedList<T> *))
+    {
+        LinkedList<T> newll;
+        for (int i = 0; i < this->length; i++)
+        {
+            T data = callback(this->operator[](i), i, this);
+            newll.insert(data);
+        }
+
+        return newll;
     }
 };
 

@@ -12,7 +12,8 @@ Array<int> arr;
 
 Array<int> arr = arr2;
 // or
-// Array<int> arr = arr2 + arr3;
+
+Array<int> arr = arr2 + arr3;
 // arr2 and arr3 are other arrays
 ```
 
@@ -102,12 +103,36 @@ arr + arr2
 // concatinates elements in arr and arr2 with concatinator
 ```
 
+# Mapping
+
+```cpp
+arr.map(T (*callback)(T));
+arr.map(T (*callback)(T, int));
+arr.map(T (*callback)(T, int, Array<T> *));
+
+// return new Array<T> object with values returned by function
+
+// example function
+int twice(int el)
+{
+     return el * 2;
+}
+
+arr.map(twice);
+
+```
+
 # Example Code
 
 ```cpp
 #include <iostream>
 #include "Array.hpp"
 using namespace std;
+
+int twice(int el)
+{
+     return el * 2;
+}
 
 int main()
 {
@@ -175,16 +200,19 @@ int main()
      cout << "2nd Array : \n"
           << arr2.join(" ") << endl;
 
-     cout << "Concatinated Array : \n"
-          << (arr + arr2).join(" ") << endl;
+     // New Array with Map Method
+     cout << "Arr * 2 with map method : \n"
+          << arr.map(twice).join(" ") << endl;
 
      // initilize array 3
-     Array<int> arr3 = arr + arr2;
+     Array<int> arr3 = (arr + arr2);
      cout << "3rd Array [new concatinated] : \n"
           << arr3.join(" ") << endl;
+
      arr3 += arr;
      cout << "3rd Array [appended] : \n"
           << arr3.join(" ") << endl;
+
      return 0;
 }
 ```
@@ -226,8 +254,8 @@ Convert Array to String With Concatinator :
 2nd Array :
 13 14 15 16 17 18 19 20
 
-Concatinated Array :
-1 2 3 4 6 7 8 9 9 10 11 13 14 15 16 17 18 19 20
+Arr * 2 with map method :
+2 4 6 8 12 14 16 18 18 20 22
 
 3rd Array [new concatinated] :
 1 2 3 4 6 7 8 9 9 10 11 13 14 15 16 17 18 19 20

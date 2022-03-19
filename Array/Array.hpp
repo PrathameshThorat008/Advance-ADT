@@ -1,6 +1,7 @@
 #pragma once
 #include <stdlib.h>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 template <class T>
@@ -15,7 +16,8 @@ public:
     Array(Array<T> *arr2)
         : length(0), arr((T *)malloc(sizeof(T) * length))
     {
-        this->operator+=(*arr2);
+        for (int i = 0; i < arr2->length; i++)
+            this->add(arr2->operator[](i));
     };
 
     void add(T el)
@@ -180,11 +182,10 @@ public:
 
     Array<T> operator+(Array<T> arr2)
     {
-        Array<T> x;
-        for (int i = 0; i < length; i++)
-            x << arr[i];
+        Array<T> x(this);
+
         for (int i = 0; i < arr2.length; i++)
-            x << arr2[i];
+            x.add(arr2[i]);
 
         return x;
     }
@@ -193,6 +194,42 @@ public:
     {
         for (int i = 0; i < arr2.length; i++)
             add(arr2[i]);
+    }
+
+    Array<T> map(T (*callback)(T))
+    {
+        Array<T> newArr;
+        for (int i = 0; i < this->length; i++)
+        {
+            T data = callback(arr[i]);
+            newArr.add(data);
+        }
+
+        return newArr;
+    }
+
+    Array<T> map(T (*callback)(T, int))
+    {
+        Array<T> newArr;
+        for (int i = 0; i < this->length; i++)
+        {
+            T data = callback(arr[i], i);
+            newArr.add(data);
+        }
+
+        return newArr;
+    }
+
+    Array<T> map(T (*callback)(T, int, Array<T> *))
+    {
+        Array<T> newArr;
+        for (int i = 0; i < this->length; i++)
+        {
+            T data = callback(arr[i], i, this);
+            newArr.add(data);
+        }
+
+        return newArr;
     }
 
     ~Array()
