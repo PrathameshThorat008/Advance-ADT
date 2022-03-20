@@ -21,7 +21,6 @@ LinkedList<int> ll = ll2 + ll3;
 
 ```cpp
 ll.insert(int el);
-ll << el;
 // el is element to insert
 
 ll.insert(int el,int index);
