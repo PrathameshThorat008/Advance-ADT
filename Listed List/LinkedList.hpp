@@ -242,3 +242,33 @@ public:
         this->next = NULL;
     }
 };
+
+template <>
+string LinkedList<char>::join(string connector)
+{
+    string str;
+    Node *curr = head;
+    while (curr->next != NULL)
+    {
+        str += curr->data + connector;
+        curr = curr->next;
+    }
+    str += curr->data;
+
+    return str;
+}
+
+template <>
+string LinkedList<string>::join(string connector)
+{
+    string str;
+    Node *curr = head;
+    while (curr->next != NULL)
+    {
+        str += curr->data + connector;
+        curr = curr->next;
+    }
+    str += curr->data;
+
+    return str;
+}
